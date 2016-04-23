@@ -1,0 +1,28 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Alle speelpleinen</ion-title>
+</ion-navbar>
+
+<ion-toolbar primary>
+  <ion-searchbar [(ngModel)]="filter.query" (input)="updateSearch($event, filter.query)"></ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="#speelplein of speelpleinenDisplayed" (click)="itemTapped($event, speelplein)">
+      <ion-icon name="basketball" item-left></ion-icon>
+      {{speelplein.praktischeInfo.organisator.naam}}
+      <div class="item-note" item-right>
+        {{speelplein.praktischeInfo.regio}}
+      </div>
+    </button>
+  </ion-list>
+  <div padding *ngIf="speelpleinenDisplayed.length == 0">
+      Geen resultaten.
+  </div>
+    <div padding *ngIf="speelpleinenDisplayed.length != 0">
+        {{ speelpleinenDisplayed.length }} resultaten.
+    </div>
+</ion-content>
